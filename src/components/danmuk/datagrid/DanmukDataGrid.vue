@@ -72,6 +72,11 @@
               v-bind:type="'button'"
               v-on:btn-click="editClick"
             ></ButtonTemplate>
+            <ButtonTemplate
+              v-bind:name="'弹框'"
+              v-bind:type="'button'"
+              v-on:btn-click="alertEditClick"
+            ></ButtonTemplate>
           </td>
         </tr>
       </table>
@@ -83,6 +88,13 @@
         ></PageInfo>
       </div>
     </div>
+    <AlertEditTemplate
+      v-if="vifAlertEdit"
+      :value="id"
+      :height="'100%'"
+      :width="'300px'"
+      v-on:close-click="alertCloseClick"
+    ></AlertEditTemplate>
   </div>
 </template>
 
@@ -91,14 +103,16 @@ import { getContent } from '@/components/danmuk/api.js'
 import ButtonTemplate from '@/components/button/ButtonTemplate.vue'
 import InputTemplate from '@/components/input/InputTemplate.vue'
 import SelectTemplate from '@/components/input/SelectTemplate.vue'
+import AlertEditTemplate from '@/components/danmuk/edit/AlertEditTemplate.vue'
 import PageInfo from '@/components/page/PageInfo.vue'
 export default {
   name: 'DanmukDataGrid',
   components: {
-    ButtonTemplate, InputTemplate, SelectTemplate, PageInfo
+    ButtonTemplate, InputTemplate, SelectTemplate, PageInfo, AlertEditTemplate
   },
   data () {
     return {
+      vifAlertEdit: false,
       searchBtn: {
         name: '查询',
         type: 'button'
@@ -163,6 +177,18 @@ export default {
           break
         }
       }
+    },
+    alertEditClick: function ($event) {
+      for (var i in $event.path) {
+        if ($event.path[i].localName == 'tr') {
+          this.id = $event.path[i].firstElementChild.innerText
+          this.vifAlertEdit = true
+          break
+        }
+      }
+    },
+    alertCloseClick: function (flag) {
+      this.vifAlertEdit = flag
     },
     viewDetailClick: function ($event) {
       console.info($event.target.innerText)

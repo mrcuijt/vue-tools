@@ -20,4 +20,10 @@ body {
   padding: 0px;
   margin: 0px;
 }
+
+.clearfix {
+  width: 1px;
+  height: 1px;
+  clear: both;
+}
 </style>
