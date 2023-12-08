@@ -1,13 +1,17 @@
 <template>
-  <div class="hello">{{ msg }}</div>
+  <div>
+    <div class="hello">{{ msg }}</div>
+    <TipAlert></TipAlert>
+  </div>
 </template>
 
 <script>
 
+import TipAlert from '@/components/alert/TipAlert.vue'
 export default {
   name: 'TabB',
   components: {
-
+    TipAlert
   },
   data () {
     return {

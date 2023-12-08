@@ -92,7 +92,7 @@
       v-if="vifAlertEdit"
       :value="id"
       :height="'100%'"
-      :width="'300px'"
+      :width="'60%'"
       v-on:close-click="alertCloseClick"
     ></AlertEditTemplate>
   </div>
